@@ -1,0 +1,33 @@
+# Example configuration overrides for the Healthcare Risk Prediction project.
+# Everything here is optional; omitted keys use the dataclass defaults in
+# config.py.
+
+data:
+  source: synthetic          # synthetic | csv
+  # csv_path: data/patients.csv
+  # target_column: risk
+  n_samples: 4000
+  test_size: 0.2
+  val_size: 0.1
+  positive_rate: 0.35
+  random_state: 42
+
+model:
+  name: gradient_boosting    # logistic | random_forest | gradient_boosting | mlp
+  class_weight_balanced: true
+  n_estimators: 200
+  max_depth: 4
+  learning_rate: 0.1
+  hidden_layer_sizes: [64, 32]
+  C: 1.0
+
+explain:
+  n_shapley_samples: 200
+  n_permutation_repeats: 10
+  pdp_grid_resolution: 20
+  background_size: 100
+  random_state: 42
+
+server:
+  host: 0.0.0.0
+  port: 8000

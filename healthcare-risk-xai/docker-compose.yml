@@ -1,0 +1,23 @@
+services:
+  api:
+    build: .
+    container_name: hc-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./artifacts:/app/artifacts
+      - ./data:/app/data
+    command: uvicorn api:app --host 0.0.0.0 --port 8000
+
+  streamlit:
+    build: .
+    container_name: hc-streamlit
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./artifacts:/app/artifacts
+      - ./data:/app/data
+    command: >
+      streamlit run app_streamlit.py
+      --server.address 0.0.0.0
+      --server.port 8501
